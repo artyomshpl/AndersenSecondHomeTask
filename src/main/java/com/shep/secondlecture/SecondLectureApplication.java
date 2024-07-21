@@ -1,13 +1,17 @@
 package com.shep.secondlecture;
 
+import com.shep.secondlecture.Models.Ticket;
+import com.shep.secondlecture.Services.TicketService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class SecondlectureApplication {
+import java.time.LocalDateTime;
 
-	public static void main(String[] args) {
-		SpringApplication.run(SecondlectureApplication.class, args);
-	}
+@SpringBootApplication
+public class SecondLectureApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SecondLectureApplication.class, args);
+    }
 
 }
