@@ -1,6 +1,6 @@
-package com.shep.secondlecture.Services;
+package com.shep.secondlecture.services;
 
-import com.shep.secondlecture.Models.Ticket;
+import com.shep.secondlecture.models.Ticket;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -36,10 +36,10 @@ public class TicketService {
 
         //Saving tickets in different ways (Saving not using JPA)
         ticketService.saveTicket(new Ticket());
-        ticketService.saveTicket("Concert Hall A", "123", unixTimestamp);
-        ticketService.saveTicket("Concert Hall B", "789", unixTimestampOtherTime);
-        ticketService.saveTicket(new Ticket("Concert Hall C", "012", unixTimestampOtherTime));
-        ticketService.saveTicket("789", "Concert Hall D", "456", unixTimestampOtherTime, false, 'C', 5.0, 7.0);
+        ticketService.saveTicket("Hall A", "123", unixTimestamp);
+        ticketService.saveTicket("Hall B", "789", unixTimestampOtherTime);
+        ticketService.saveTicket(new Ticket("Hall C", "012", unixTimestampOtherTime));
+        ticketService.saveTicket("789", "Hall D", "456", unixTimestampOtherTime, false, 'C', 5.0, 7.0);
 
 
         // Print all tickets
