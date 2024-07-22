@@ -63,12 +63,12 @@ Getter/Setter to show that I'm familiar with that but using lombok is way more r
     }
 
     public void validDataShortCheck(String concertHall, String eventCode){
-        if(concertHall.length() > 10 || concertHall.length() < 1){
+        if(concertHall.length() > 10 || concertHall.isEmpty()){
             throw new IllegalArgumentException("Concert hall length must be in 1-10 range!"
                     + " Your value: " + concertHall + " is " + concertHall.length());
         }
 
-        if(eventCode.length() > 3 || eventCode.length() < 1){
+        if(eventCode.length() > 3 || eventCode.isEmpty()){
             throw new IllegalArgumentException("Event code length must be in 1-3 range!"
                     + " Your value: " + eventCode + " is " + eventCode.length());
         }
@@ -82,7 +82,7 @@ Getter/Setter to show that I'm familiar with that but using lombok is way more r
                     + " Your value: " + stadiumSector);
         }
 
-        if(id.length() > 4 || id.length() < 1){
+        if(id.length() > 4 || id.isEmpty()){
             throw new IllegalArgumentException("Ticket id length must be in 1-4 range!"
                     + " Your value " + id + " is " + id.length());
         }
