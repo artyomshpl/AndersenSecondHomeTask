@@ -4,17 +4,12 @@ import com.shep.fourthlecture.models.Admin;
 import com.shep.fourthlecture.models.Client;
 import com.shep.fourthlecture.models.Ticket;
 import com.shep.fourthlecture.models.base.User;
-import com.shep.fourthlecture.sharing.EmailShare;
-import com.shep.fourthlecture.sharing.PhoneShare;
-import com.shep.fourthlecture.sharing.impl.Shareable;
-import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 public class TicketService {
     private List<Ticket> tickets = new ArrayList<>();
 
@@ -56,29 +51,25 @@ public class TicketService {
         }
 
         // Demonstrate polymorphism with User, Client, and Admin
-        User client = new Client(1, "Carlson");
-        User admin = new Admin(2);
+        User client = new Client("1", "Carlson");
+        User admin = new Admin("2");
 
         Ticket ticketForChecking = new Ticket("Hall M", "312", unixTimestampOtherTime, true, 'B', 15.0, 25.0);
         System.out.println("\nCreating ticket for testing client and user. Ticket: " + ticketForChecking);
         System.out.println("Printing users with roles. " +
                 "Also demonstrating the polymorphism represented in unique functions of users with different roles");
         client.printRole();
-        client.uniqueFunction(ticketForChecking);
+        client.handleTicket(ticketForChecking);
 
         admin.printRole();
-        admin.uniqueFunction(ticketForChecking);
+        admin.handleTicket(ticketForChecking);
 
         Ticket ticketForSharing = new Ticket("Hall E", "789", unixTimestampOtherTime, true, 'B', 10.0, 20.0);
         System.out.println("\nCreating ticket for testing sharing. Ticket: " + ticketForSharing);
 
-        Shareable phoneShare = new PhoneShare("111-222-333");
-        Shareable phoneAndEmailShare = new EmailShare("user@gmail.com");
-
-
-        System.out.println("Printing logs of sharing tickets via number and email");
-        ticketForSharing.share(phoneShare);
-        ticketForSharing.share(phoneAndEmailShare);
+        System.out.println("Printing logs of sharing tickets via number and email. Representing polymorphism");
+        ticketForSharing.share("123-456-789");
+        ticketForSharing.share("987-654-321","user@gmail.com");
 
         //Demonstrating overridden methods ".equals" and ".hashCode" inherited from Object class
         Ticket ticket1 = new Ticket("Hall X", "111", unixTimestamp, true, 'A', 8.0, 18.0);

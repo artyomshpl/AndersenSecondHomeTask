@@ -4,27 +4,36 @@ import com.shep.fourthlecture.annotations.NotNull;
 import com.shep.fourthlecture.annotations.NotNullWarningProcessor;
 import com.shep.fourthlecture.models.impl.Identifiable;
 import com.shep.fourthlecture.models.impl.Printable;
-import com.shep.fourthlecture.sharing.impl.Shareable;
+import com.shep.fourthlecture.models.impl.Shareable;
+import com.shep.fourthlecture.utils.DateTimeUtil;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
-public class Ticket implements Identifiable, Printable {
+public class Ticket implements Identifiable, Printable, Shareable {
     @NotNull
-    private int id;
+    private String id;
+    @Setter(AccessLevel.NONE)
     private String concertHall;
+    @Setter(AccessLevel.NONE)
     private String eventCode;
+    //Setter available for time
     private Long time;
+    @Setter(AccessLevel.NONE)
     private boolean isPromo;
+    //Setter available for stadiumSector
     private char stadiumSector;
+    @Setter(AccessLevel.NONE)
     private double maxBackpackWeight;
+    @Setter(AccessLevel.NONE)
     private double price;
+    @Setter(AccessLevel.NONE)
     private LocalDateTime creationTime;
 
     private static int nextId = 0;
@@ -34,7 +43,7 @@ public class Ticket implements Identifiable, Printable {
     }
 
     public Ticket(String concertHall, String eventCode, Long time, boolean isPromo, char stadiumSector, double maxBackpackWeight, double price) {
-        this.id = getNextId();
+        this.id = String.valueOf(getNextId());
         this.concertHall = concertHall;
         this.eventCode = eventCode;
         this.time = time;
@@ -48,7 +57,7 @@ public class Ticket implements Identifiable, Printable {
     }
 
     public Ticket(String concertHall, String eventCode, Long time) {
-        this.id = getNextId();
+        this.id = String.valueOf(getNextId());
         this.concertHall = concertHall;
         this.eventCode = eventCode;
         this.time = time;
@@ -56,7 +65,7 @@ public class Ticket implements Identifiable, Printable {
     }
 
     public Ticket(){
-        this.id = getNextId();
+        this.id = String.valueOf(getNextId());
         this.concertHall = "Default";
         this.creationTime = LocalDateTime.now();
     }
@@ -82,7 +91,7 @@ public class Ticket implements Identifiable, Printable {
     }
 
 
-    public void validDataLongCheck(int id, String concertHall, String eventCode, char stadiumSector) {
+    public void validDataLongCheck(String id, String concertHall, String eventCode, char stadiumSector) {
         try {
             validDataShortCheck(concertHall, eventCode);
 
@@ -102,23 +111,18 @@ public class Ticket implements Identifiable, Printable {
         }
     }
 
-
-    public static LocalDateTime convertUnixTimestampToLocalDateTime(long unixTimestamp) {
-        return LocalDateTime.ofInstant(Instant.ofEpochSecond(unixTimestamp), ZoneId.systemDefault());
-    }
-
     @Override
     public String toString() {
         String stringResult;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy");
         if(this.shortVersionCheck(this.stadiumSector)){
             time = time == null ? Instant.now().getEpochSecond() : time;
-            stringResult ="ID: = " + id + " Concert hall = " + concertHall + ", Time = " + convertUnixTimestampToLocalDateTime(time).format(formatter);
+            stringResult ="ID: = " + id + " Concert hall = " + concertHall + ", Time = " + DateTimeUtil.convertUnixTimestampToLocalDateTime(time).format(formatter);
         } else {
             time = time == null ? Instant.now().getEpochSecond() : time;
             stringResult = "Ticket number (id) = " + id + ", Concert hall = " + concertHall
                     + ", Event code = " + eventCode
-                    + ", Time = " + convertUnixTimestampToLocalDateTime(time).format(formatter) + ", Promo = " + isPromo
+                    + ", Time = " + DateTimeUtil.convertUnixTimestampToLocalDateTime(time).format(formatter) + ", Promo = " + isPromo
                     + ", StadiumSector = " + stadiumSector
                     + ", Max Backpack weight = " + maxBackpackWeight
                     + ", Price = " + price
@@ -129,12 +133,12 @@ public class Ticket implements Identifiable, Printable {
     }
 
     @Override
-    public int getId(){
+    public String getId(){
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -175,19 +179,14 @@ public class Ticket implements Identifiable, Printable {
         return result;
     }
 
+    @Override
+    public void share(String number) {
+        System.out.println("Sharing ticket via number: " + number + " Ticket shared: " + this);
+    }
 
-
-
-    public void share(Shareable shareable) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy");
-        String message = "Ticket number (id) = " + id + ", Concert hall = " + concertHall
-                + ", Event code = " + eventCode
-                + ", Time = " + convertUnixTimestampToLocalDateTime(time).format(formatter) + ", Promo = " + isPromo
-                + ", StadiumSector = " + stadiumSector
-                + ", Max Backpack weight = " + maxBackpackWeight
-                + ", Price = " + price
-                + ", creationTime = " + creationTime.format(formatter);
-        shareable.share(message);
+    @Override
+    public void share(String number, String email){
+        System.out.println("Sharing ticket via number: " + number + " and via email: " + email + " Ticket shared: " + this);
     }
 }
 

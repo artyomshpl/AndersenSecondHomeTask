@@ -10,28 +10,28 @@ import lombok.Setter;
 @Setter
 public abstract class User implements Identifiable, Printable {
     @NotNull
-    private int id;
+    private String id;
     private String role;
     private String name;
 
-    public User(int id, String role, String name) {
+    public User(String id, String role, String name) {
         this.id = id;
         this.role = role;
         this.name = name;
     }
 
-    public User(int id, String role) {
+    public User(String id, String role) {
         this.id = id;
         this.role = role;
     }
 
     @Override
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,7 +39,7 @@ public abstract class User implements Identifiable, Printable {
         System.out.println("Role: " + role);
     }
 
-    public abstract void uniqueFunction(Ticket ticket);
+    public abstract void handleTicket(Ticket ticket);
 }
 
 

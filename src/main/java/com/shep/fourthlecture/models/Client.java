@@ -4,7 +4,7 @@ import com.shep.fourthlecture.models.base.User;
 
 public class Client extends User {
 
-    public Client(int id, String name) {
+    public Client(String id, String name) {
         super(id, "Client", name);
     }
 
@@ -13,7 +13,7 @@ public class Client extends User {
     }
 
     @Override
-    public void uniqueFunction(Ticket ticket) {
+    public void handleTicket(Ticket ticket) {
         getTicket(ticket);
     }
 }
