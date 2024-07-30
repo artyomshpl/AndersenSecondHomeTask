@@ -2,7 +2,6 @@ package com.shep.fourthlecture.models;
 
 import com.shep.fourthlecture.annotations.NotNull;
 import com.shep.fourthlecture.annotations.NotNullWarningProcessor;
-import com.shep.fourthlecture.models.impl.Identifiable;
 import com.shep.fourthlecture.models.impl.Printable;
 import com.shep.fourthlecture.models.impl.Shareable;
 import com.shep.fourthlecture.utils.DateTimeUtil;
@@ -16,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
-public class Ticket implements Identifiable, Printable, Shareable {
+public class Ticket implements Printable, Shareable {
     @NotNull
     private String id;
     @Setter(AccessLevel.NONE)
@@ -130,16 +129,6 @@ public class Ticket implements Identifiable, Printable, Shareable {
         }
 
         return stringResult;
-    }
-
-    @Override
-    public String getId(){
-        return id;
-    }
-
-    @Override
-    public void setId(String id) {
-        this.id = id;
     }
 
     @Override

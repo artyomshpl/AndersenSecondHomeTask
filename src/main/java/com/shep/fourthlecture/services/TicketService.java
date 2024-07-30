@@ -3,7 +3,6 @@ package com.shep.fourthlecture.services;
 import com.shep.fourthlecture.models.Admin;
 import com.shep.fourthlecture.models.Client;
 import com.shep.fourthlecture.models.Ticket;
-import com.shep.fourthlecture.models.base.User;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -51,18 +50,18 @@ public class TicketService {
         }
 
         // Demonstrate polymorphism with User, Client, and Admin
-        User client = new Client("1", "Carlson");
-        User admin = new Admin("2");
+        Client client = new Client("1", "Carlson");
+        Admin admin = new Admin("2");
 
         Ticket ticketForChecking = new Ticket("Hall M", "312", unixTimestampOtherTime, true, 'B', 15.0, 25.0);
         System.out.println("\nCreating ticket for testing client and user. Ticket: " + ticketForChecking);
         System.out.println("Printing users with roles. " +
                 "Also demonstrating the polymorphism represented in unique functions of users with different roles");
         client.printRole();
-        client.handleTicket(ticketForChecking);
+        client.getTicket(ticketForChecking);
 
         admin.printRole();
-        admin.handleTicket(ticketForChecking);
+        admin.checkTicket(ticketForChecking);
 
         Ticket ticketForSharing = new Ticket("Hall E", "789", unixTimestampOtherTime, true, 'B', 10.0, 20.0);
         System.out.println("\nCreating ticket for testing sharing. Ticket: " + ticketForSharing);

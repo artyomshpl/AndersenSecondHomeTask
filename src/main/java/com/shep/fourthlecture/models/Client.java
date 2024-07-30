@@ -11,9 +11,4 @@ public class Client extends User {
     public void getTicket(Ticket ticket) {
         System.out.println("Client " + super.getName() + " gets a ticket: " + ticket.toString());
     }
-
-    @Override
-    public void handleTicket(Ticket ticket) {
-        getTicket(ticket);
-    }
 }

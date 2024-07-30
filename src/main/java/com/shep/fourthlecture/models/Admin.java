@@ -21,9 +21,4 @@ public class Admin extends User {
             System.out.println("Ticket is expired");
         }
     }
-
-    @Override
-    public void handleTicket(Ticket ticket) {
-        checkTicket(ticket);
-    }
 }

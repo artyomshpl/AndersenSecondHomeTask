@@ -2,7 +2,6 @@ package com.shep.fourthlecture.models.base;
 
 import com.shep.fourthlecture.annotations.NotNull;
 import com.shep.fourthlecture.models.impl.*;
-import com.shep.fourthlecture.models.Ticket;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,7 +38,6 @@ public abstract class User implements Identifiable, Printable {
         System.out.println("Role: " + role);
     }
 
-    public abstract void handleTicket(Ticket ticket);
 }
 
 
